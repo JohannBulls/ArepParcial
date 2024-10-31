@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Algorithms</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Linear Search</h1>
+    <input type="text" id="linearList" placeholder="Comma-separated list">
+    <input type="text" id="linearValue" placeholder="Value to search">
+    <button onclick="linearSearch()">Search</button>
+    <div id="linearResult"></div>
+
+    <h1>Binary Search</h1>
+    <input type="text" id="binaryList" placeholder="Comma-separated list (sorted)">
+    <input type="text" id="binaryValue" placeholder="Value to search">
+    <button onclick="binarySearch()">Search</button>
+    <div id="binaryResult"></div>
+
+    <script>
+        function linearSearch() {
+            let list = document.getElementById("linearList").value;
+            let value = document.getElementById("linearValue").value;
+            fetch(`/proxy/linearsearch?list=${list}&value=${value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("linearResult").innerText = JSON.stringify(data);
+                });
+        }
+
+        function binarySearch() {
+            let list = document.getElementById("binaryList").value;
+            let value = document.getElementById("binaryValue").value;
+            fetch(`/proxy/binarysearch?list=${list}&value=${value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("binaryResult").innerText = JSON.stringify(data);
+                });
+        }
+    </script>
+</body>
+</html>
